@@ -27,12 +27,18 @@ namespace common.resources
         /// </summary>
         public XmlData XmlData;
 
+        /// <summary>
+        /// This public variable stores all the static documents read, inside a class: StaticFiles.cs.
+        /// </summary>
+        public StaticFiles StaticFiles;
+
         /// <param name="root">Root path of your resource files.</param>
         public Resources(string root)
         {
             log.Info("Loading Resources...");
             m_root = root;
-            XmlData = new XmlData($"{root}/xml");
+            XmlData = new XmlData(string.Format("{0}/xml", m_root));
+            StaticFiles = new StaticFiles(string.Format("{0}/statics", m_root));
             log.Info("Resources loaded...");
         }
 
@@ -42,6 +48,7 @@ namespace common.resources
         public void Dispose()
         {
             XmlData.Dispose();
+            StaticFiles.Dispose();
             log.Info("Resources disposed...");
         }
     }

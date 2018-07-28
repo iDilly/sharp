@@ -1,4 +1,4 @@
 ﻿{
-  "bind": "*",
+  "bind": "localhost",
   "port": 80
 }
