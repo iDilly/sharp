@@ -38,7 +38,7 @@ namespace common.resources
             log.Info("Loading Resources...");
             m_root = root;
             XmlData = new XmlData(string.Format("{0}/xml", m_root));
-            StaticFiles = new StaticFiles(string.Format("{0}/statics", m_root));
+            StaticFiles = new StaticFiles(string.Format("{0}/data", m_root));
             log.Info("Resources loaded...");
         }
 

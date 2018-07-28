@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="requests\app\globalNews.cs" />
+    <Compile Include="requests\app\init.cs" />
     <Compile Include="requests\app\getLanguageStrings.cs" />
     <Compile Include="requests\crossdomain.cs" />
     <Compile Include="Server.cs" />

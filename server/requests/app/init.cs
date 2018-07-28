@@ -9,14 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using static server.Manager;
 
-namespace server.requests
+namespace server.requests.app
 {
     /// <summary>
-    /// This is the crossdomain class, it is part of the requests handled by the HTTP server.
+    /// This is the init class, it is part of the requests handled by the HTTP server.
     /// </summary>
-    public class crossdomain : NancyRequest
+    public class init : NancyRequest
     {
-        public crossdomain() : base("/crossdomain.xml")
+        public init() : base("/app/init")
         {
             print(string.Format("Dispatching request {0}...", Dispatch));
         }
@@ -26,6 +26,6 @@ namespace server.requests
         /// </summary>
         /// <param name="nt">Type of the NancyRequest received. This is used commonly to jump between query types.</param>
         public override string Handle(NancyRequestType nt)
-            => Manager.Resources.StaticFiles.Obtain(StaticFile.CROSSDOMAIN);
+            => Manager.Resources.StaticFiles.Obtain(StaticFile.INIT);
     }
 }

@@ -12,7 +12,7 @@ using static server.Manager;
 namespace server.requests.app
 {
     /// <summary>
-    /// This is the crossdomain class, it is part of the requests handled by the HTTP server.
+    /// This is the getLanguageStrings class, it is part of the requests handled by the HTTP server.
     /// </summary>
     public class getLanguageStrings : NancyRequest
     {

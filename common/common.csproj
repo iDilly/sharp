@@ -61,28 +61,34 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="resources\statics\de.json">
+    <None Include="resources\data\de.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\statics\en.json">
+    <None Include="resources\data\en.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\statics\es.json">
+    <None Include="resources\data\es.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\statics\fr.json">
+    <None Include="resources\data\fr.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\statics\it.json">
+    <None Include="resources\data\it.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="resources\statics\ru.json">
+    <None Include="resources\data\ru.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="resources\statics\crossdomain.xml">
+    <Content Include="resources\data\crossdomain.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="resources\data\globalnews.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="resources\data\init.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\xml\abyssofdemons.xml">
