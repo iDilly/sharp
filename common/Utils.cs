@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace common
     /// </summary>
     public static partial class Utils
     {
+        /// <summary>
+        /// Private static readonly variable, which defines the logger instance for this class.
+        /// </summary>
+        static readonly ILog log = LogManager.GetLogger(typeof(Utils));
+
         /// <summary>
         /// The ReadAsync static method allows you to read documents in an asynchronous fasion.
         /// </summary>

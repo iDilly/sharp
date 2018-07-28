@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace common
     public class Settings
     {
         /// <summary>
+        /// Private static readonly variable, which defines the logger instance for this class.
+        /// </summary>
+        static readonly ILog log = LogManager.GetLogger(typeof(Settings));
+
+        /// <summary>
         /// This is a public server variable, which stores information used by the App server.
         /// </summary>
         public s_server Server;
@@ -26,10 +32,12 @@ namespace common
         {
             var t1 = Utils.ReadAsync("server.json").ContinueWith((t) => {
                 Server = JsonConvert.DeserializeObject<s_server>(t.Result);
+                log.Info("Server information parsed...");
             });
 
             var t2 = Utils.ReadAsync("common.json").ContinueWith((t) => {
                 Common = JsonConvert.DeserializeObject<s_common>(t.Result);
+                log.Info("Common information parsed...");
             });
 
             Task.WaitAll(t1, t2);

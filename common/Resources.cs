@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,13 @@ namespace common
     /// <summary>
     /// This is the Resources class, it can be seen as the parent of all game resource holders.
     /// </summary>
-    public class Resources
+    public class Resources : IDisposable
     {
+        /// <summary>
+        /// Private static readonly variable, which defines the logger instance for this class.
+        /// </summary>
+        static readonly ILog log = LogManager.GetLogger(typeof(Resources));
+
         /// <summary>
         /// This is a private string variable which simply stores the root path given.
         /// </summary>
@@ -26,6 +32,15 @@ namespace common
         {
             m_root = root;
             XmlData = new XmlData($"{root}/xml");
+            log.Info("XmlData initialized.");
+        }
+
+        /// <summary>
+        /// This method is used for disposal of the class instance, as implemented by the IDisposable interface.
+        /// </summary>
+        public void Dispose()
+        {
+
         }
     }
 }

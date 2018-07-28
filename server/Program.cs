@@ -1,6 +1,9 @@
 ﻿using common;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,9 +17,24 @@ namespace server
     public class Program
     {
         /// <summary>
+        /// Private static readonly variable, which defines the logger instance for this class.
+        /// </summary>
+        static readonly ILog log = LogManager.GetLogger(typeof(Program)); 
+
+        /// <summary>
         /// This is a private static ManualResetEvent varaible, it is used to handle termination of the program.
         /// </summary>
         static ManualResetEvent m_reset;
+
+        /// <summary>
+        /// This is a private static Resources varaible, it is used to store all necessary resources of the game.
+        /// </summary>
+        static Resources m_resources;
+
+        /// <summary>
+        /// This is a private static Settings varaible, it is used to store a variety of different configuration options.
+        /// </summary>
+        static Settings m_settings;
 
         /// <summary>
         /// This is the static Main method, it is used as the initial start-up method by the program.
@@ -24,9 +42,18 @@ namespace server
         /// <param name="args">String arguments passed along when loading the executable file.</param>
         static void Main(string[] args)
         {
+            XmlConfigurator.Configure(new FileInfo("server.config"));
+            string root = args.Length > 0 ? args[0] : "resources";
+
+            m_resources = new Resources(root);
+            m_settings = new Settings();
+
             m_reset = new ManualResetEvent(false);
             Console.CancelKeyPress += OnCancelKeyPress;
             m_reset.WaitOne();
+
+            log.Info("Terminating program...");
+            m_resources.Dispose();
         }
 
         /// <summary>
@@ -34,9 +61,7 @@ namespace server
         /// </summary>
         /// <param name="sender">Object value passed as the object which has triggered the event.</param>
         /// <param name="e">The event information that sent from the event handler.</param>
-        static void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
-        {
-            m_reset.Set();
-        }
+        static void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e) 
+            => m_reset.Set();
     }
 }
