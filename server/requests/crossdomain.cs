@@ -16,10 +16,7 @@ namespace server.requests
     /// </summary>
     public class crossdomain : NancyRequest
     {
-        public crossdomain() : base("/crossdomain.xml")
-        {
-            print(string.Format("Dispatching request {0}...", Dispatch));
-        }
+        public crossdomain() : base("/crossdomain.xml") { }
 
         /// <summary>
         /// This is the string that is obtained after the request is handled/complete, it gets sent back to the client.

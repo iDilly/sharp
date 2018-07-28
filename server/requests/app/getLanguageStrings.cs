@@ -16,10 +16,7 @@ namespace server.requests.app
     /// </summary>
     public class getLanguageStrings : NancyRequest
     {
-        public getLanguageStrings() : base("/app/getLanguageStrings")
-        {
-            print(string.Format("Dispatching request {0}...", Dispatch));
-        }
+        public getLanguageStrings() : base("/app/getLanguageStrings") { }
 
         /// <summary>
         /// This is the string that is obtained after the request is handled/complete, it gets sent back to the client.

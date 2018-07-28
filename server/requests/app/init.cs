@@ -16,10 +16,7 @@ namespace server.requests.app
     /// </summary>
     public class init : NancyRequest
     {
-        public init() : base("/app/init")
-        {
-            print(string.Format("Dispatching request {0}...", Dispatch));
-        }
+        public init() : base("/app/init") { }
 
         /// <summary>
         /// This is the string that is obtained after the request is handled/complete, it gets sent back to the client.

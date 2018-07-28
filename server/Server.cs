@@ -2,11 +2,14 @@
 using common.resources;
 using log4net;
 using Nancy;
+using Nancy.Bootstrapper;
+using Nancy.ErrorHandling;
 using Nancy.Extensions;
 using Nancy.Hosting.Self;
 using server.requests;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +40,54 @@ namespace server
     }
 
     /// <summary>
+    /// This is the NancyUnknown class, it overides the default error return mechanic of Nancy.
+    /// </summary>
+    public class NancyUnknown : IStatusCodeHandler
+    {
+        /// <summary>
+        /// Private static readonly variable, which defines the logger instance for this class.
+        /// </summary>
+        static readonly ILog log = LogManager.GetLogger(typeof(NancyUnknown));
+
+        /// <summary>
+        /// This is the private IRootPathProvider variable, it is part of the IStatusCodeHandler interface from Nancy.
+        /// </summary>
+        readonly IRootPathProvider m_root;
+
+        /// <summary>
+        /// This is the private static string variable, it is a simple byte array encoded string, which returns the error you get upon sending an unknown request.
+        /// </summary>
+        static byte[] m_error = Encoding.UTF8.GetBytes("Sorry, unknown request.");
+        
+        /// <param name="root">This is the root path provider that the IStatusCodeHandler interface will use.</param>
+        public NancyUnknown(IRootPathProvider root)
+        {
+            m_root = root;
+        }
+
+        /// <summary>
+        /// This is a public function that is used to define the HttpStatusCode of the request, it is part of the IStatusCodeHandler interface from Nancy.
+        /// </summary>
+        public bool HandlesStatusCode(HttpStatusCode statusCode, NancyContext context)
+        {
+            return statusCode == HttpStatusCode.NotFound;
+        }
+
+        /// <summary>
+        /// This is a public function that is used to handle the unknown request, it is part of the IStatusCodeHandler interface from Nancy.
+        /// </summary>
+        public void Handle(HttpStatusCode statusCode, NancyContext context)
+        {
+            log.Info(string.Format("Unknown request received {0}...", context.Request.Path));
+            context.Response.Contents = stream =>
+            {
+                stream.Write(m_error, 0, m_error.Length);
+                stream.Close();
+            };
+        }
+    }
+
+    /// <summary>
     /// This is the NancyRequest class, it is a very simple class to make request handling easier.
     /// </summary>
     public abstract class NancyRequest : NancyModule
@@ -62,6 +113,7 @@ namespace server
             };
 
             Dispatch = a;
+            print(string.Format("Dispatching request {0}...", Dispatch));
         }
 
         /// <summary>
@@ -139,8 +191,9 @@ namespace server
                 Manager.Resources = m_resources;
                 m_nancy = new NancyHost(config, new Uri(string.Format("http://{0}:{1}", bind, port)));
                 m_nancy.Start();
-                Manager.Dispatch = true;
+                Dispatch = true;
             });
+
             log.Info(string.Format("Server {0} at address <{1}:{2}>...", 
                 s ? "started" : "failed to start", bind, port));
         }
@@ -152,7 +205,7 @@ namespace server
         {
             log.Info("Stopping & disposing Server...");
             Utils.Invoke(false, () => {
-                Manager.Dispatch = false;
+                Dispatch = false;
                 m_nancy.Stop();
                 m_nancy.Dispose();
             });
