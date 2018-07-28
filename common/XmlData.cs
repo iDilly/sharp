@@ -16,7 +16,7 @@ namespace common
         /// </summary>
         string m_root;
 
-        /// <param name="root">Root path of your resource files.</param>
+        /// <param name="root">Root path of your game data (XML) files.</param>
         public XmlData(string root)
         {
             m_root = root;
