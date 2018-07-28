@@ -45,7 +45,7 @@ namespace common
         /// This is public bind variable, the App server uses it when it starts up its Http server.
         /// </summary>
         [JsonProperty("bind")]
-        public string Bind { get; set; } = "sss";
+        public string Bind { get; set; } = "*";
 
         /// <summary>
         /// This is public port variable, the App server uses it when it starts up its Http server.
