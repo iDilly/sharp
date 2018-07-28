@@ -30,6 +30,7 @@ namespace common
 
         public Settings()
         {
+            log.Info("Loading Settings...");
             var t1 = Utils.ReadAsync("server.json").ContinueWith((t) => {
                 Server = JsonConvert.DeserializeObject<s_server>(t.Result);
                 log.Info("Server information parsed...");
@@ -41,6 +42,7 @@ namespace common
             });
 
             Task.WaitAll(t1, t2);
+            log.Info("Settings loaded...");
         }
     }
 

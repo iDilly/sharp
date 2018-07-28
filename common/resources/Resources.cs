@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace common
+namespace common.resources
 {
     /// <summary>
     /// This is the Resources class, it can be seen as the parent of all game resource holders.
@@ -30,9 +30,10 @@ namespace common
         /// <param name="root">Root path of your resource files.</param>
         public Resources(string root)
         {
+            log.Info("Loading Resources...");
             m_root = root;
             XmlData = new XmlData($"{root}/xml");
-            log.Info("XmlData initialized.");
+            log.Info("Resources loaded...");
         }
 
         /// <summary>
@@ -40,7 +41,8 @@ namespace common
         /// </summary>
         public void Dispose()
         {
-
+            XmlData.Dispose();
+            log.Info("Resources disposed...");
         }
     }
 }

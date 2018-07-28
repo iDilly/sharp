@@ -1,4 +1,5 @@
 ﻿using common;
+using common.resources;
 using log4net;
 using log4net.Config;
 using System;
@@ -51,9 +52,6 @@ namespace server
             m_reset = new ManualResetEvent(false);
             Console.CancelKeyPress += OnCancelKeyPress;
             m_reset.WaitOne();
-
-            log.Info("Terminating program...");
-            m_resources.Dispose();
         }
 
         /// <summary>
@@ -61,7 +59,12 @@ namespace server
         /// </summary>
         /// <param name="sender">Object value passed as the object which has triggered the event.</param>
         /// <param name="e">The event information that sent from the event handler.</param>
-        static void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e) 
-            => m_reset.Set();
+        static void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            m_reset.Set();
+            log.Info("Terminating program...");
+            m_resources.Dispose();
+            log.Info("Program terminated...");
+        }
     }
 }
