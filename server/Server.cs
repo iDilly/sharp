@@ -22,6 +22,9 @@ namespace server
     /// </summary>
     public class Manager
     {
+        /// <summary>
+        /// This is the NancyRequestType enum, it stores different types of requests (as an example: GET).
+        /// </summary>
         public enum NancyRequestType
         {
             GET,

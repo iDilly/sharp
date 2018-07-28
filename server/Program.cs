@@ -43,6 +43,11 @@ namespace server
         static Server m_server;
 
         /// <summary>
+        /// This is a private static Database variable, it connects to the MongoDB database and provides you with many useful functions.
+        /// </summary>
+        static Database m_database;
+
+        /// <summary>
         /// This is a private static object variable, it is used to ensure that all the necessary resources load first before you attempt to terminate the program.
         /// </summary>
         static object m_lock;
@@ -64,6 +69,7 @@ namespace server
                 string root = args.Length > 0 ? args[0] : "resources";
                 m_resources = new Resources(root);
                 m_settings = new Settings();
+                m_database = new Database(m_settings);
                 m_server = new Server(m_resources, m_settings.Server.Bind, m_settings.Server.Port);
             }
 
