@@ -21,7 +21,7 @@ namespace common
         static readonly ILog log = LogManager.GetLogger(typeof(Utils));
 
         /// <summary>
-        /// The ReadAsync static method allows you to read documents in an asynchronous fasion.
+        /// The ReadAsync static method allows you to read documents in a asynchronous fasion.
         /// </summary>
         /// <param name="p">Path of the document that you want to read.</param>
         public static async Task<string> ReadAsync(string p)
@@ -38,7 +38,7 @@ namespace common
         }
 
         /// <summary>
-        /// The ReadAfter static method allows you to read documents in an synchronous fasion with a callback attatched.
+        /// The ReadAfter static method allows you to read documents in a synchronous fasion with a callback attatched.
         /// </summary>
         /// <param name="p">Path of the document that you want to read.</param>
         /// <param name="c">Action to callback on after the file is read.</param>
@@ -52,7 +52,7 @@ namespace common
         }
 
         /// <summary>
-        /// The Read static method allows you to read documents in an synchronous fasion.
+        /// The Read static method allows you to read documents in a synchronous fasion.
         /// </summary>
         /// <param name="p">Path of the document that you want to read.</param>
         public static string Read(string p)

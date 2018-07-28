@@ -27,6 +27,8 @@ common/[Oo]bj/
 common/[Bb]in/
 server/[Oo]bj/
 server/[Bb]in/
+wServer/[Oo]bj/
+wServer/[Bb]in/
 
 # Visual Studio 2015 cache/options directory
 .vs/
