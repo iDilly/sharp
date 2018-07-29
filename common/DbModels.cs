@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace common
 {
@@ -187,6 +188,46 @@ namespace common
         /// </summary>
         [BsonElement("name")]
         public string Name;
+
+        /// <summary>
+        /// Provides you with the DbAccount structure converted to an XML root element.
+        /// These type of methods are commonly used as exports from the App server to the client.
+        /// </summary>
+        public XElement ToXml()
+        {
+            var ret = new XElement("Account");
+            ret.Add(new XElement("Credits", Credits));
+            ret.Add(new XElement("FortuneToken", FortuneTokens));
+            ret.Add(new XElement("NextCharSlotPrice", NextCharSlotPrice));
+            ret.Add(new XElement("AccountId", Id));
+            if (VerifiedEmail)
+                ret.Add(new XElement("VerifiedEmail"));
+            ret.Add(new XElement("PetYardType", PetYardType));
+            ret.Add(new XElement("Name", Name));
+            if (NameChosen)
+                ret.Add(new XElement("NameChosen"));
+            ret.Add(new XElement("BeginnerPackageStatus", BeginnerPackageStatus ? 1 : 0));
+            ret.Add(new XElement("IsAgeVerified", IsAgeVerified ? 1 : 0));
+            var security = new XElement("SecurityQuestions");
+            security.Add(new XElement("HasSecurityQuestions", HasSecurityQuestions ? 1 : 0));
+            security.Add(new XElement("ShowSecurityQuestionsDialog", ShowSecurityQuestions ? 1 : 0));
+            security.Add(new XElement("SecurityQuestionsKeys", 
+                new XElement("SecurityQuestionsKey", "SecurityQuestionsDialog.question1"),
+                new XElement("SecurityQuestionsKey", "SecurityQuestionsDialog.question2"),
+                new XElement("SecurityQuestionsKey", "SecurityQuestionsDialog.question3")));
+            ret.Add(security);
+            var stats = new XElement("Stats");
+            foreach (var i in ClassStats)
+                stats.Add(new XElement("ClassStats",
+                    new XAttribute("objectType", i.ObjectType),
+                    new XElement("BestLevel", i.BestLevel),
+                    new XElement("BestFame", i.BestFame)));
+            stats.Add(new XElement("BestCharFame", BestCharFame));
+            stats.Add(new XElement("TotalFame", TotalFame));
+            stats.Add(new XElement("Fame", Fame));
+            ret.Add(stats);
+            return ret;
+        }
     }
 
     /// <summary>

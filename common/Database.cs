@@ -136,7 +136,7 @@ namespace common
                 VerifiedEmail = false,
                 HasSecurityQuestions = true,
                 ShowSecurityQuestions = true,
-                PetYardType = 0,
+                PetYardType = 1,
                 NextCharSlotPrice = 600
             };
 
@@ -182,7 +182,7 @@ namespace common
                 VerifiedEmail = false,
                 HasSecurityQuestions = true,
                 ShowSecurityQuestions = true,
-                PetYardType = 0,
+                PetYardType = 1,
                 NextCharSlotPrice = 600
             };
             return acc;
