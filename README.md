@@ -20,7 +20,9 @@ Alternatively, you can copy and paste this link: `https://visualstudio.microsoft
 
 Please keep in mind that this source is always a WIP, so some features might not always work, but if you find any features that are broken or throw errors, please [file an issue](https://github.com/iDilly/sharp/issues) to this Git repository if you can with logs of what happened and how to replicate the problem (if possible).
 
-3. It is *recommended* to spend some time looking through the comments & summaries that the source provides. It should help you understand what code does what and how the source is structured.
+3. Simply have fun! 
+
+It is *recommended* to spend some time looking through the comments & summaries that the source provides. It should help you understand what code does what and how the source is structured.
 
 ### Version : X27.0.2
 It is recommended to use the client provided with the source.
