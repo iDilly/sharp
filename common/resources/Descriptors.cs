@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -61,6 +62,171 @@ namespace common.resources
         /// This is the ArmorPiercing bool variable, it defines whether the projectile can Armor pierce objects.
         /// </summary>
         public bool ArmorPiercing { get; private set; }
+    }
+
+    /// <summary>
+    /// This is the XmlPlayer class, it represents a parsed XML data player.
+    /// </summary>
+    public class XmlPlayer
+    {
+        /// <param name="e">Root element of your object XML data.</param>
+        /// <param name="type">Type (ushort) of the object: ObjectType.</param>
+        /// <param name="id">Id (string) of the object: ObjectId.</param>
+        public XmlPlayer(XElement e, ushort type, string id)
+        {
+            ObjectType = type;
+            ObjectId = id;
+
+            Class = e.GetValue<string>("Class");
+
+            LevelIncreases = new List<Tuple<int, int>>();
+            foreach (var i in e.Elements("LevelIncrease"))
+                LevelIncreases.Add(Tuple.Create(
+                    i.GetAttribute<int>("min"),
+                    i.GetAttribute<int>("max")));
+
+            Unlocks = new List<Tuple<int, ushort>>();
+            foreach (var i in e.Elements("UnlockLevel"))
+                Unlocks.Add(Tuple.Create(
+                    i.GetAttribute<int>("level"),
+                    i.GetAttribute<ushort>("type")));
+
+            Console.WriteLine(e.GetValue<string>("Equipment"));
+            Equipment = e.GetValue<string>("Equipment").ToIntArray(", ");
+            SlotTypes = e.GetValue<string>("SlotTypes").ToIntArray(", ");
+
+            MaxHP = e.Element("MaxHitPoints").GetAttribute<int>("max");
+            HP = e.GetValue<int>("MaxHitPoints");
+            MaxMP = e.Element("MaxMagicPoints").GetAttribute<int>("max");
+            MP = e.GetValue<int>("MaxMagicPoints");
+            MaxATK = e.Element("Attack").GetAttribute<int>("max");
+            ATK = e.GetValue<int>("Attack");
+            MaxDEF = e.Element("Defense").GetAttribute<int>("max");
+            DEF = e.GetValue<int>("Defense");
+            MaxSPD = e.Element("Speed").GetAttribute<int>("max");
+            SPD = e.GetValue<int>("Speed");
+            MaxDEX = e.Element("Dexterity").GetAttribute<int>("max");
+            DEX = e.GetValue<int>("Dexterity");
+            MaxVIT = e.Element("HpRegen").GetAttribute<int>("max");
+            VIT = e.GetValue<int>("HpRegen");
+            MaxWIS = e.Element("MpRegen").GetAttribute<int>("max");
+            WIS = e.GetValue<int>("MpRegen");
+        }
+
+        /// <summary>
+        /// This is the ObjectType ushort variable, it defines the object type of the object.
+        /// </summary>
+        public ushort ObjectType { get; private set; }
+
+        /// <summary>
+        /// This is the ObjectId string variable, it defines the name/unique Id of the object.
+        /// </summary>
+        public string ObjectId { get; private set; }
+
+        /// <summary>
+        /// This is the Class string variable, it defines the class type of the object.
+        /// </summary>
+        public string Class { get; private set; }
+
+        /// <summary>
+        /// This is the Equipment int array variable, it defines the starting equipment of the player class.
+        /// </summary>
+        public int[] Equipment { get; private set; }
+
+        /// <summary>
+        /// This is the SlotTypes int array variable, it defines the slot types of the player class.
+        /// </summary>
+        public int[] SlotTypes { get; private set; }
+
+        /// <summary>
+        /// This is the MaxHP int variable, it defines the maximum amount of HP of the player class.
+        /// </summary>
+        public int MaxHP { get; private set; }
+
+        /// <summary>
+        /// This is the HP int variable, it defines the starting amount of HP of the player class.
+        /// </summary>
+        public int HP { get; private set; }
+
+        /// <summary>
+        /// This is the MaxMP int variable, it defines the maximum amount of MP of the player class.
+        /// </summary>
+        public int MaxMP { get; private set; }
+
+        /// <summary>
+        /// This is the MP int variable, it defines the starting amount of MP of the player class.
+        /// </summary>
+        public int MP { get; private set; }
+
+        /// <summary>
+        /// This is the MaxATK int variable, it defines the maximum amount of ATK of the player class.
+        /// </summary>
+        public int MaxATK { get; private set; }
+
+        /// <summary>
+        /// This is the ATK int variable, it defines the starting amount of ATK of the player class.
+        /// </summary>
+        public int ATK { get; private set; }
+        
+        /// <summary>
+        /// This is the MaxDEF int variable, it defines the maximum amount of DEF of the player class.
+        /// </summary>
+        public int MaxDEF { get; private set; }
+
+        /// <summary>
+        /// This is the DEF int variable, it defines the starting amount of DEF of the player class.
+        /// </summary>
+        public int DEF { get; private set; }
+
+        /// <summary>
+        /// This is the MaxSPD int variable, it defines the maximum amount of SPD of the player class.
+        /// </summary>
+        public int MaxSPD { get; private set; }
+
+        /// <summary>
+        /// This is the SPD int variable, it defines the starting amount of SPD of the player class.
+        /// </summary>
+        public int SPD { get; private set; }
+
+        /// <summary>
+        /// This is the MaxDEX int variable, it defines the maximum amount of DEX of the player class.
+        /// </summary>
+        public int MaxDEX { get; private set; }
+
+        /// <summary>
+        /// This is the DEX int variable, it defines the starting amount of DEX of the player class.
+        /// </summary>
+        public int DEX { get; private set; }
+
+        /// <summary>
+        /// This is the MaxVIT int variable, it defines the maximum amount of VIT of the player class.
+        /// </summary>
+        public int MaxVIT { get; private set; }
+
+        /// <summary>
+        /// This is the VIT int variable, it defines the starting amount of VIT of the player class.
+        /// </summary>
+        public int VIT { get; private set; }
+
+        /// <summary>
+        /// This is the MaxWIS int variable, it defines the maximum amount of WIS of the player class.
+        /// </summary>
+        public int MaxWIS { get; private set; }
+
+        /// <summary>
+        /// This is the WIS int variable, it defines the starting amount of WIS of the player class.
+        /// </summary>
+        public int WIS { get; private set; }
+
+        /// <summary>
+        /// This is the tuple list variable, it stores all data about unlocks for the player class.
+        /// </summary>
+        public List<Tuple<int, ushort>> Unlocks { get; private set; }
+
+        /// <summary>
+        /// This is the tuple list variable, it stores all data about level increases for the player class.
+        /// </summary>
+        public List<Tuple<int, int>> LevelIncreases { get; private set; }
     }
 
     /// <summary>
@@ -216,7 +382,7 @@ namespace common.resources
         public double Experience { get; private set; }
 
         /// <summary>
-        /// This is the XmlProjectile array variable, it defines all the Xml projectiles of the object.
+        /// This is the XmlProjectile list variable, it defines all the Xml projectiles of the object.
         /// </summary>
         public List<XmlProjectile> Projectiles { get; private set; }
     }

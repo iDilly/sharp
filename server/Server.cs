@@ -35,7 +35,12 @@ namespace server
         /// This is a public static Resources variable, it is used to store all necessary resources of the game, took as a reference from Server.cs.
         /// </summary>
         public static Resources Resources;
-        
+
+        /// <summary>
+        /// This is a public static Database variable, it is used as the connector to MongoDB, and it provides many useful storage based functions.
+        /// </summary>
+        public static Database Database;
+
         /// <summary>
         /// This is a public static bool variable, it determines whether the server is ready to log request dispatching.
         /// </summary>
@@ -183,7 +188,7 @@ namespace server
         /// <param name="resources">This represents the game data/Resources which store all necessary information that needs to be accessed by requests.</param>
         /// <param name="bind">This is the bind address that NancyHost uses to initialize the server.</param>
         /// <param name="port">This is the bind port that NancyHost uses to initialize the server.</param>
-        public Server(Resources resources, string bind, int port)
+        public Server(Resources resources, Database db, string bind, int port)
         {
             HostConfiguration config = new HostConfiguration();
             config.UrlReservations.CreateAutomatically = true;
@@ -192,6 +197,7 @@ namespace server
             log.Info("Starting Server...");
             bool s = Utils.Invoke(true, () => {
                 Manager.Resources = m_resources;
+                Manager.Database = db;
                 m_nancy = new NancyHost(config, new Uri(string.Format("http://{0}:{1}", bind, port)));
                 m_nancy.Start();
                 Dispatch = true;

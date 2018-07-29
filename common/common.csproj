@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="DbModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="resources\Descriptors.cs" />
     <Compile Include="resources\Resources.cs" />

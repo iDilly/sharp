@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -146,6 +147,18 @@ namespace common
 
             log.Error(string.Format("Type of {0} is not supported by this method, returning default value: {1}...", t, def));
             return def;
+        }
+
+        /// <summary>
+        /// This simple function allows you to quickly convert a string to an int array.
+        /// </summary>
+        /// <param name="s">The string you want to convert to a string array.</param>
+        /// <param name="p">The seperator/splitter.</param>
+        public static int[] ToIntArray(this string s, string p)
+        {
+            string[] sep = new string[] { p };
+            var split = s.Split(sep, StringSplitOptions.None);
+            return split.Select(o => o.Contains("-") ? int.Parse(o) : (int)Convert.ToUInt32(o, 16)).ToArray(); 
         }
     }
 }

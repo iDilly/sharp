@@ -35,6 +35,21 @@ namespace common.resources
         public Dictionary<ushort, XmlObject> TypeToObject = new Dictionary<ushort, XmlObject>();
 
         /// <summary>
+        /// This string >> ushort dictionary enables you to quickly obtain an object type from a string if it exists.
+        /// </summary>
+        public Dictionary<string, ushort> IdToPlayerType = new Dictionary<string, ushort>();
+
+        /// <summary>
+        /// This ushort >> string dictionary enables you to quickly obtain an object Id from a type if it exists.
+        /// </summary>
+        public Dictionary<ushort, string> TypeToPlayerId = new Dictionary<ushort, string>();
+
+        /// <summary>
+        /// This ushort >> XmlPlayer dictionary enables you to quickly obtain an XML player from a type if it exists.
+        /// </summary>
+        public Dictionary<ushort, XmlPlayer> TypeToPlayer = new Dictionary<ushort, XmlPlayer>();
+
+        /// <summary>
         /// This is a private string variable which simply stores the root path given.
         /// </summary>
         string m_root;
@@ -63,6 +78,8 @@ namespace common.resources
                 });
 
             Task.WaitAll(ts.ToArray());
+            log.Info(string.Format("Parsed {0} Objects!", TypeToObject.Count));
+            log.Info(string.Format("Parsed {0} Players!", TypeToPlayer.Count));
             log.Info("XmlData loaded...");
         }
 
@@ -74,17 +91,26 @@ namespace common.resources
         {
             ushort type;
             string id;
-            string cls;
+            string c;
             foreach (var i in e.Elements("Object"))
             {
                 type = i.GetAttribute<ushort>("type");
                 id = i.GetAttribute<string>("id");
-                cls = i.GetValue<string>("Class");
 
+                c = i.GetValue<string>("Class");
                 object xml;
 
-                switch (cls)
+                switch (c)
                 {
+                    case "Player":
+                        xml = new XmlPlayer(i, type, id);
+                        lock (m_lock)
+                        {
+                            TypeToPlayer[type] = (XmlPlayer)xml;
+                            TypeToPlayerId[type] = id;
+                            IdToPlayerType[id] = type;
+                        }
+                        break;
                     default:
                         xml = new XmlObject(i, type, id);
                         lock (m_lock)

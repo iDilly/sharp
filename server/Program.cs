@@ -70,7 +70,7 @@ namespace server
                 m_resources = new Resources(root);
                 m_settings = new Settings();
                 m_database = new Database(m_settings);
-                m_server = new Server(m_resources, m_settings.Server.Bind, m_settings.Server.Port);
+                m_server = new Server(m_resources, m_database, m_settings.Server.Bind, m_settings.Server.Port);
             }
 
             m_reset.WaitOne();
