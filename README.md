@@ -24,5 +24,5 @@ Please keep in mind that this source is always a WIP, so some features might not
 
 4. It is *recommended* to spend some time looking through the comments & summaries that the source provides. It should help you understand what code does what and how the source is structured.
 
-### Version : X27.0.1
+### Version : X27.0.2
 It is recommended to use the client provided with the source.
