@@ -63,10 +63,17 @@ namespace server
         readonly IRootPathProvider m_root;
 
         /// <summary>
-        /// This is the private static string variable, it is a simple byte array encoded string, which returns the error you get upon sending an unknown request.
+        /// This is the private byte array variable, it is a simple byte array encoded string, which returns the error you get upon sending an unknown/invalid request.
         /// </summary>
-        static byte[] m_error = Encoding.UTF8.GetBytes("Sorry, unknown request.");
-        
+        byte[] m_error => Encoding.UTF8.GetBytes(m_code == HttpStatusCode.NotFound ? 
+            "Unknown request!" : 
+            "Internal server error!");
+
+        /// <summary>
+        /// Stores the HttpStatusCode obtained when handling the request.
+        /// </summary>
+        HttpStatusCode m_code;
+
         /// <param name="root">This is the root path provider that the IStatusCodeHandler interface will use.</param>
         public NancyUnknown(IRootPathProvider root)
         {
@@ -78,7 +85,9 @@ namespace server
         /// </summary>
         public bool HandlesStatusCode(HttpStatusCode statusCode, NancyContext context)
         {
-            return statusCode == HttpStatusCode.NotFound;
+            m_code = statusCode;
+            return m_code == HttpStatusCode.NotFound ||
+                   m_code == HttpStatusCode.InternalServerError;
         }
 
         /// <summary>

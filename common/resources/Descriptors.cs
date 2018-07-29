@@ -90,8 +90,7 @@ namespace common.resources
                 Unlocks.Add(Tuple.Create(
                     i.GetAttribute<int>("level"),
                     i.GetAttribute<ushort>("type")));
-
-            Console.WriteLine(e.GetValue<string>("Equipment"));
+            
             Equipment = e.GetValue<string>("Equipment").ToIntArray(", ");
             SlotTypes = e.GetValue<string>("SlotTypes").ToIntArray(", ");
 

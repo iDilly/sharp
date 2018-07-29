@@ -14,6 +14,7 @@ namespace common.resources
     {
         CROSSDOMAIN,
         GLOBALNEWS,
+        ITEMCOSTS,
         INIT,
         DE,
         EN,
@@ -50,6 +51,7 @@ namespace common.resources
             m_root = root;
             Map(string.Format("{0}/crossdomain.xml", m_root), StaticFile.CROSSDOMAIN);
             Map(string.Format("{0}/globalnews.json", m_root), StaticFile.GLOBALNEWS);
+            Map(string.Format("{0}/itemcosts.xml", m_root), StaticFile.ITEMCOSTS);
             Map(string.Format("{0}/init.xml", m_root), StaticFile.INIT);
             Map(string.Format("{0}/en.json", m_root), StaticFile.EN);
             Map(string.Format("{0}/de.json", m_root), StaticFile.DE);

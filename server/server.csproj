@@ -65,6 +65,7 @@
     <Compile Include="requests\app\getLanguageStrings.cs" />
     <Compile Include="requests\char\list.cs" />
     <Compile Include="requests\crossdomain.cs" />
+    <Compile Include="requests\sfx.cs" />
     <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
