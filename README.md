@@ -18,11 +18,9 @@ Alternatively, you can copy and paste this link: `https://www.mongodb.com/downlo
 *To compile the project, you can use the Visual Studio IDE, which is available for free download [here](https://visualstudio.microsoft.com/downloads/).*   
 Alternatively, you can copy and paste this link: `https://visualstudio.microsoft.com/downloads/`.
 
-3. The .SWF game file is located in the root folder of the whole source. `/client.swf`. If you're wondering what the client version is on the current build of the server, feel free to take a look at the version number below the *Getting started* section.
-
 Please keep in mind that this source is always a WIP, so some features might not always work, but if you find any features that are broken or throw errors, please [file an issue](https://github.com/iDilly/sharp/issues) to this Git repository if you can with logs of what happened and how to replicate the problem (if possible).
 
-4. It is *recommended* to spend some time looking through the comments & summaries that the source provides. It should help you understand what code does what and how the source is structured.
+3. It is *recommended* to spend some time looking through the comments & summaries that the source provides. It should help you understand what code does what and how the source is structured.
 
 ### Version : X27.0.2
 It is recommended to use the client provided with the source.
