@@ -69,7 +69,7 @@ namespace common.resources
             _map[s] = Utils.Read(p);
 
         /// <summary>
-        /// This is the Obtain function. You can use it to get the cached/save data.
+        /// This is the Obtain function. You can use it to get the cached/saved data.
         /// </summary>
         /// <param name="s">Type of the StaticFile that you want to retrieve from the cache.</param>
         public string Obtain(StaticFile s)
