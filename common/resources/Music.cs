@@ -16,7 +16,7 @@ namespace common.resources
         /// <summary>
         /// Private static readonly variable, which defines the logger instance for this class.
         /// </summary>
-        static readonly ILog log = LogManager.GetLogger(typeof(StaticFiles));
+        static readonly ILog log = LogManager.GetLogger(typeof(Music));
 
         /// <summary>
         /// This is a private string variable which simply stores the root path given.

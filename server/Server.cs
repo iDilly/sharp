@@ -98,7 +98,7 @@ namespace server
             var p = context.Request.Path;
             var sfx = p.Contains("sfx") || p.Contains("music");
             if (!sfx)
-                log.Info(string.Format("Unknown request received {0}...", context.Request.Path));
+                log.Info(string.Format("Unknown request received {0}...", p));
             byte[] d = sfx ? 
                 Manager.Resources.Music.Obtain(p): 
                 m_error;
