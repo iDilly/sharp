@@ -58,6 +58,7 @@ namespace server
         /// <param name="args">String arguments passed along when loading the executable file.</param>
         static void Main(string[] args)
         {
+            string root = args.Length > 0 ? args[0] : "resources";
             m_reset = new ManualResetEvent(false);
             m_lock = new object();
 
@@ -66,7 +67,6 @@ namespace server
 
             lock (m_lock)
             {
-                string root = args.Length > 0 ? args[0] : "resources";
                 m_resources = new Resources(root);
                 m_settings = new Settings();
                 m_database = new Database(m_settings);

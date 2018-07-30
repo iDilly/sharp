@@ -66,6 +66,19 @@ namespace common
         }
 
         /// <summary>
+        /// The ReadBytes static method allows you to read documents in a synchronous fasion (returning a byte array).
+        /// </summary>
+        /// <param name="p">Path of the document that you want to read.</param>
+        public static byte[] ReadBytes(string p)
+        {
+            byte[] ret = new byte[0];
+            Invoke(true, () => {
+                ret = File.ReadAllBytes(p);
+            });
+            return ret;
+        }
+
+        /// <summary>
         /// The Invoke static method allows you to easily perform error-safe actions.
         /// </summary>
         /// <param name="l">Whether you want to log the exception if one is caught.</param>

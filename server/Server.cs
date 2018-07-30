@@ -95,10 +95,16 @@ namespace server
         /// </summary>
         public void Handle(HttpStatusCode statusCode, NancyContext context)
         {
-            log.Info(string.Format("Unknown request received {0}...", context.Request.Path));
+            var p = context.Request.Path;
+            var sfx = p.Contains("sfx") || p.Contains("music");
+            if (!sfx)
+                log.Info(string.Format("Unknown request received {0}...", context.Request.Path));
+            byte[] d = sfx ? 
+                Manager.Resources.Music.Obtain(p): 
+                m_error;
             context.Response.Contents = stream =>
             {
-                stream.Write(m_error, 0, m_error.Length);
+                stream.Write(d, 0, d.Length);
                 stream.Close();
             };
         }

@@ -32,6 +32,11 @@ namespace common.resources
         /// </summary>
         public StaticFiles StaticFiles;
 
+        /// <summary>
+        /// This public variable stores all the SFX/Music files read, inside a class: Music.cs.
+        /// </summary>
+        public Music Music;
+
         /// <param name="root">Root path of your resource files.</param>
         public Resources(string root)
         {
@@ -39,6 +44,7 @@ namespace common.resources
             m_root = root;
             XmlData = new XmlData(string.Format("{0}/xml", m_root));
             StaticFiles = new StaticFiles(string.Format("{0}/data", m_root));
+            Music = new Music(string.Format("{0}/sfx", m_root));
             log.Info("Resources loaded...");
         }
 
@@ -47,8 +53,10 @@ namespace common.resources
         /// </summary>
         public void Dispose()
         {
+            log.Info("Disposing Resources...");
             XmlData.Dispose();
             StaticFiles.Dispose();
+            Music.Dispose();
             log.Info("Resources disposed...");
         }
     }
